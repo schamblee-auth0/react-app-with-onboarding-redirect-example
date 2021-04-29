@@ -1,4 +1,23 @@
-# Easy User Authentication for React Apps (Sample with Classes)
+# React example with onboarding redirect
+
+This is an example of rule-based redirect for onboarding based off of the article: https://auth0.com/blog/complete-guide-to-react-user-authentication
+
+Rule:
+
+```
+function (user, context, callback) {
+  var loginCount = context.stats && context.stats.loginsCount ? context.stats.loginsCount : 0;
+  var url = "http://localhost:4040/onboarding";
+  
+  if (context.protocol !== "redirect-callback" && loginCount <= 1) {
+    context.redirect = { url };
+  }
+  
+  return callback(null, user, context);
+}
+```
+
+## Easy User Authentication for React Apps (Sample with Classes)
 
 This repository hosts a React project that defines a Single-Page Application (SPA). You'll secure access to some of its routes using Auth0 User Authentication.
 
